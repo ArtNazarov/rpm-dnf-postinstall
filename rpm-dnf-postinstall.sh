@@ -325,9 +325,7 @@ echo "Confirm [Y,n]"
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
 	echo "begin install security"
-	sudo dnf install -y apparmor
     sudo dnf install -y firejail
-
 else
         echo "skipped security install"
 fi
@@ -343,7 +341,16 @@ echo "Confirm [Y,n]"
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
         echo "begin install bluetooth"
-       sudo dnf install -y bluez bluez-utils blueman
+        sudo dnf install -y bluez bluez-utils blueman
+        sudo dnf install -y bluez.x86_64 # Bluetooth utilities
+        sudo dnf install -y kf5-bluez-qt.x86_64 # A Qt wrapper for Bluez
+        sudo dnf install -y kf5-bluez-qt-devel.x86_64 # Development files for kf5-bluez-qt
+        sudo dnf install -y python3-bluez.x86_64
+        sudo dnf install -y bluez-cups.x86_64 # CUPS printer backend for Bluetooth printers
+        sudo dnf install -y bluez-mesh.x86_64 # Bluetooth mesh
+        sudo dnf install -y bluez-obexd.x86_64 # Object Exchange daemon for sharing content
+        sudo dnf install -y bluez-tools.x86_64 # A set of tools to manage Bluetooth devices for Linux
+
 else
         echo "skipped bluetooth install"
 fi

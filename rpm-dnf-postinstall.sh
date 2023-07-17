@@ -655,10 +655,11 @@ read input
 if [[ $input == "Y" || $input == "y" ]]; then
 
 
-    su -
-    dnf install  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
 
-    dnf install  -y vlc
+        sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+        sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+        sudo dnf install -y vlc
+        sudo dnf install -y python-vlc # (optional)
 
 else
         echo "skipped video player install"
@@ -674,10 +675,7 @@ echo "Confirm [Y,n]"
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
 
-
-
-    sudo yum install  -y keepassx
-    sudo snap install  -y keepassxc
+    sudo snap install keepassxc
 
 else
         echo "skipped password tool install"

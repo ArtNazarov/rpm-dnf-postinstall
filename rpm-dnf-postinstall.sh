@@ -88,12 +88,10 @@ echo "INSTALL PROC FREQ TOOLS (RECOMMENDED)? [Y/N]?"
 echo "Confirm [Y,n]"
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
-
-		sudo dnf install -y linux-tools-common
-        sudo dnf install -y linux-tools-generic
-        sudo dnf install -y linux-tools-`uname -r`
-        sudo dnf install -y cpupower-gui
-        sudo dnf install -y cpupower
+       sudo dnf install -y alien.noarch
+       wget https://github.com/vagnum08/cpupower-gui/releases/download/v1.0.0/cpupower-gui_1.0.0-1_all.deb
+       sudo alien --to-rpm --scripts  cpupower-gui_1.0.0-1_all.deb
+       sudo dnf install -y cpupower-gui-1.0.0-2.noarch.rpm
 else
         echo "skipped PROC FREQ install"
 fi
@@ -222,14 +220,20 @@ echo "Confirm [Y,n]"
 read input
     if [[ $input == "Y" || $input == "y" ]]; then
 
-    # Install the AMDGPU driver
-    sudo dnf install -y kernel-devel akmod-amdgpu xorg-x11-drv-amdgpu
+        sudo dnf makecache --refresh
+        sudo dnf -y install mesa-libGLU
+        sudo dnf -y install mesa-vulkan-drivers.x86_64 # Mesa Vulkan drivers
+        sudo dnf -y install pipewire-plugin-vulkan.x86_64 # PipeWire media server vulkan support
+        sudo dnf -y install vulkan-loader.x86_64 # Vulkan ICD desktop loader
+        sudo dnf -y install vulkan-tools.x86_64 # Vulkan tools
+        sudo dnf -y install vulkan-validation-layers.x86_64 # Vulkan validation layers
+        sudo dnf -y install dxvk-native.x86_64 # Vulkan-based D3D11 and D3D9 implementation for Linux
+        sudo dnf -y install libvkd3d.x86_64 # D3D12 to Vulkan translation library
+        sudo dnf -y install mangohud.x86_64 # Vulkan overlay layer for monitoring FPS, temperatures,
+        sudo dnf -y install vkBasalt.x86_64 # Vulkan post processing layer
+        sudo dnf -y install vkmark.x86_64 # Vulkan benchmarking suite
+        sudo dnf -y install wine-dxvk.x86_64 # Vulkan-based D3D11 and D3D10 implementation for Linux /
 
-    # Install mesa libraries
-    sudo dnf install -y mesa-libGL-devel mesa-libGLU-devel mesa-libEGL-devel mesa-libgbm-devel mesa-libGLX-devel
-
-    # Install vulkan-radeon and vulkan-icd-loader
-    sudo dnf install -y vulkan-radeon vulkan-icd-loader
 
 else
         echo "skipped vulkan installation"

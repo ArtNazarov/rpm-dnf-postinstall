@@ -505,7 +505,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
         sudo dnf update  -y
 
 
-        sudo dnf install  -y qbittorrent uget uget-integrator filezilla putty
+        sudo dnf install  -y qbittorrent uget filezilla putty
 
 
 else
@@ -616,7 +616,7 @@ echo "Confirm [Y,n]"
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
         flatpak install  -y fsearch
-		flatpak install --user org.apache.netbeans  -y
+        flatpak install org.apache.netbeans
 else
         echo "skipped flatpak soft install"
 fi
@@ -637,8 +637,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
         sudo ln -s /var/lib/snapd/snap /snap
         sudo systemctl start snapd.socket
 		sudo systemctl enable snapd.socket
-		snap install  -y core
-		snap install  -y snap-store
+		snap install  core
+		snap install  snap-store
 
 
 else

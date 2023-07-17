@@ -367,7 +367,7 @@ read input
 if [[ $input == "Y" || $input == "y" ]]; then
         echo "begin install sound"
         sudo dnf install -y pulseaudio pulseaudio-bluetooth jack2 jack2-dbus pulseaudio-alsa pulseaudio-jack pavucontrol
-
+        sudo dnf install -y pulseaudio-module-jack.x86_64 # JACK support for the PulseAudio sound server
         pulseaudio -k
 		pulseaudio -D
 		sudo chown $USER:$USER ~/.config/pulse
@@ -389,6 +389,19 @@ read input
 if [[ $input == "Y" || $input == "y" ]]; then
         echo "begin pipewire sound"
         sudo dnf install -y pipewire-audio-client-libraries libspa-0.2-bluetooth libspa-0.2-jack pipewire-alsa pipewire-jack pavucontrol
+
+        sudo dnf install -y jack-audio-connection-kit.x86_64 # The Jack Audio Connection Kit
+        sudo dnf install -y jack-audio-connection-kit-dbus.x86_64 # Jack D-Bus launcher
+        sudo dnf install -y jack-mixer.x86_64 # JACK Audio Mixer
+        sudo dnf install -y jack_capture.x86_64 # Record sound files with JACK
+        sudo dnf install -y pg123-plugins-jack.x86_64 # JACK output plug-in for mpg123
+        sudo dnf install -y pipewire-jack-audio-connection-kit.x86_64 # PipeWire JACK implementation
+        sudo dnf install -y pipewire-jack-audio-connection-kit-libs.x86_64 # PipeWire JACK implementation libraries
+        sudo dnf install -y pipewire-plugin-jack.x86_64 # PipeWire media server JACK support
+        sudo dnf install -y pki-resteasy-jackson2-provider.noarch # Module jackson2-provider for resteasy
+        sudo dnf install -y projectM-jack.x86_64 # The projectM visualization plugin for jack
+
+
 
     # Disable pipewire-pulse.service and pipewire-pulse.socket
         sudo systemctl --global --now disable pipewire-pulse.service pipewire-pulse.socket
@@ -412,7 +425,33 @@ echo "Confirm [Y,n]"
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
         echo "begin ALSA sound"
-	sudo dnf install -y alsa-tools alsa-base
+        sudo dnf install -y alsa-tools alsa-base
+        sudo dnf install -y alsa-plugins-jack.x86_64 # Jack PCM output plugin for ALSA
+        sudo dnf install -y alsa-firmware.noarch # Firmware for several ALSA-supported sound cards
+        sudo dnf install -y alsa-lib.x86_64 # The Advanced Linux Sound Architecture (ALSA) library
+        sudo dnf install -y alsa-lib-devel.x86_64 # Development files from the ALSA library
+        sudo dnf install -y alsa-plugins-a52.x86_64 # A52 output plugin for ALSA using libavcodec
+        sudo dnf install -y alsa-plugins-arcamav.x86_64 # Arcam AV amplifier plugin for ALSA
+        sudo dnf install -y alsa-plugins-avtp.x86_64 # Audio Video Transport Protocol (AVTP) plugin for ALSA
+        sudo dnf install -y alsa-plugins-jack.x86_64 # Jack PCM output plugin for ALSA
+        sudo dnf install -y alsa-plugins-lavrate.x86_64 # Rate converter plugin for ALSA using libavcodec
+        sudo dnf install -y alsa-plugins-maemo.x86_64 # Maemo plugin for ALSA
+        sudo dnf install -y alsa-plugins-oss.x86_64 # Oss PCM output plugin for ALSA
+        sudo dnf install -y alsa-plugins-pulseaudio.x86_64 # Alsa to PulseAudio backend
+        sudo dnf install -y alsa-plugins-samplerate.x86_64 # External rate converter plugin for ALSA
+        sudo dnf install -y alsa-plugins-upmix.x86_64 # Upmixer channel expander plugin for ALSA
+        sudo dnf install -y alsa-plugins-usbstream.x86_64 # USB stream plugin for ALSA
+        sudo dnf install -y alsa-plugins-vdownmix.x86_64 # Downmixer to stereo plugin for ALSA
+        sudo dnf install -y alsa-tools.x86_64 # Specialist tools for ALSA
+        sudo dnf install -y alsa-tools-firmware.x86_64 # ALSA tools for uploading firmware to some soundcards
+        sudo dnf install -y alsa-topology.noarch # ALSA Topology configuration
+        sudo dnf install -y alsa-topology-utils.x86_64 # Advanced Linux Sound Architecture (ALSA) - Topology
+        sudo dnf install -y alsa-ucm.noarch # ALSA Use Case Manager configuration
+        sudo dnf install -y alsa-ucm-utils.x86_64 # Advanced Linux Sound Architecture (ALSA) - Use Case Manager
+        sudo dnf install -y alsa-utils.x86_64 # Advanced Linux Sound Architecture (ALSA) utilities
+        sudo dnf install -y alsa-utils-alsabat.x86_64 # Advanced Linux Sound Architecture (ALSA) - Basic Audio Tester
+        sudo dnf install -y alsamixergui.x86_64 # GUI mixer for ALSA sound devices
+        sudo dnf install -y pipewire-alsa.x86_64 # PipeWire media server ALSA support
 else
         echo "skipped ALSA sound install"
 fi

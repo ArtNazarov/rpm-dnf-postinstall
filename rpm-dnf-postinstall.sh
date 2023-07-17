@@ -76,7 +76,7 @@ echo "Confirm [Y,n]"
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
 		sudo dnf install wpa_supplicant  -y
-        sudo dnf install dhcp  -y
+        	sudo dnf install dhcp-client.x86_6 -y
 		sudo systemctl mask NetworkManager-wait-online.service
 else
         echo "skipped networking install"
